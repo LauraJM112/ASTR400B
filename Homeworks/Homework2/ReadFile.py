@@ -25,3 +25,5 @@ def Read(filename):
     data = np.genfromtxt(filename,dtype=None,names=True,skip_header=3)
     
     return time, num_particles, data
+
+

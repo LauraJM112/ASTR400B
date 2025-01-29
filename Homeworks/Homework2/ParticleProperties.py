@@ -5,7 +5,7 @@ Created on Tue Jan 28 11:32:31 2025
 
 @author: lauramack
 """
-import Astropy.units as u
+import astropy.units as u
 import numpy as np
 from ReadFile import Read
 
@@ -38,28 +38,28 @@ def ParticleInfo(filename, part_type, num_particles):
     
     type_index = np.where(data["type"] == part_type) #index data for particles  
         # in area of interest
-    type_data = data["type"][type_index] # filter data to only match the type
+    type_data = data[type_index] # filter data to only match the type
     
-    x = type_data["x"] #grab x values
+    
+    x = (type_data["x"]) #grab x values
     y = type_data["y"] #grab y values
     z = type_data["z"] #grab z values
     distance = (x**2 + y**2 + z**2)**0.5*u.kpc #use pythagorean theorem to 
         #find the magnitude of the distance
     distance = np.around(distance, 3) #round to 3 places
+    distance = distance.to(u.lightyear)
     
     
     vx = type_data["vx"] #grab x velocities
     vy = type_data["vy"] #grab y velocities
     vz = type_data["vz"] #grab z velocities
-    velocity = (vx**2 + vy**2 + vz**2)**0.5*u.kms #use pythagorean theorem to
+    velocity = (vx**2 + vy**2 + vz**2)**0.5*u.km/u.s #use pythagorean theorem to
         #find the magnitude of the velocity
     velocity = np.around(velocity,3) #round to 3 places
     
     mass = type_data["m"]*u.Msun #grab mass values and set to units of M_sun
-
+    
     
     return distance, velocity, mass
-    
-    
-    
+
     
