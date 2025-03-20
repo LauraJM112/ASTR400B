@@ -1,0 +1,187 @@
+% mnras_template.tex 
+%
+% LaTeX template for creating an MNRAS paper
+%
+% v3.3 released April 2024
+% (version numbers match those of mnras.cls)
+%
+% Copyright (C) Royal Astronomical Society 2015
+% Authors:
+% Keith T. Smith (Royal Astronomical Society)
+
+% Change log
+%
+% v3.3 April 2024
+%   Updated \pubyear to print the current year automatically
+% v3.2 July 2023
+%	Updated guidance on use of amssymb package
+% v3.0 May 2015
+%    Renamed to match the new package name
+%    Version number matches mnras.cls
+%    A few minor tweaks to wording
+% v1.0 September 2013
+%    Beta testing only - never publicly released
+%    First version: a simple (ish) template for creating an MNRAS paper
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Basic setup. Most papers should leave these options alone.
+\documentclass[fleqn,usenatbib]{mnras}
+
+% MNRAS is set in Times font. If you don't have this installed (most LaTeX
+% installations will be fine) or prefer the old Computer Modern fonts, comment
+% out the following line
+\usepackage{newtxtext,newtxmath}
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+
+% Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by "N" and "L" etc. in the bibliography.
+% Write the name in the bibliography as "\VAN{Noord}{Van}{van} Noord, Thomas"
+\DeclareRobustCommand{\VAN}[3]{#2}
+\let\VANthebibliography\thebibliography
+\def\thebibliography{\DeclareRobustCommand{\VAN}[3]{##3}\VANthebibliography}
+
+
+%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
+
+% Only include extra packages if you really need them. Avoid using amssymb if newtxmath is enabled, as these packages can cause conflicts. newtxmatch covers the same math symbols while producing a consistent Times New Roman font. Common packages are:
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
+
+% Please keep new commands to a minimum, and use \newcommand not \def to avoid
+% overwriting existing commands. Example:
+%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+% Title of the paper, and the short title which is used in the headers.
+% Keep the title short and informative.
+\title[Research Assignment 2]{Research Assignment 2 - Proposal}
+
+% The list of authors, and the short list which is used in the headers.
+% If you need two or more lines of authors, add an extra line using \newauthor
+
+%double check this
+\author[L. Mack]{
+Laura J. Mack
+}
+
+% Prints the current year, for the copyright statements etc. To achieve a fixed year, replace the expression with a number. 
+\pubyear{\the\year{}}
+
+% Don't change these lines
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+\subsection{Define Proposed Topic}
+\label{sec:par1}
+Galaxy morphology, which comes from typically visual description, correlates to stellar formation history and the history of the galaxy itself. This traditionally visual inspection done by a small number of astronomers while useful has some level of subjectivity. These classification are often derived from the classification scheme described by \citep{Hubble1926}, which can be seen in Fig~\ref{fig:TuningFork}. Though recent developments of Large Survey Astronomy has led to crowd-sourced analysis \citep{Masters2025morphology}, with a large number of separate classifications, visual inspection has remained a very useful tool for classification.\\
+% Tuning Fork? from Masters 2025
+%need to change caption
+\begin{figure}
+	\includegraphics[width=\columnwidth]{TuningFork.png}
+    \caption{The Hubble tuning fork. This particular version is from \citet{Masters2025morphology} and also includes example galaxy images from the Sloan Digital Sky Survey. }
+    \label{fig:TuningFork}
+\end{figure}
+
+Major galaxy mergers, which occur between two galaxies of similar mass, result in the development of early type galaxies (ETGs). In the Hubble tuning fork, ETGs are the left side strand encompassing elliptical and lenticular (S0) galaxies. ETGs can also be described as galaxies that have stellar formation rates below the mean. This encompasses elliptical, S0 and Sa galaxies. Elliptical galaxies in particular, are classified by their ellipticity. 
+\begin{equation}
+n = 10[1-\frac{a}{b}]. 
+\end{equation}
+Where n is the ellipticity, a is the major axis and b is the minor axis of the projected ellipse. 
+
+
+
+
+\subsection{Why this Matters}
+Understanding and classifying galaxies can lead to understanding patterns in galaxy formation. This understanding can be used to connect the disparate snapshots gathered from observations into a complete picture of galaxy evolution. The formation of elliptical galaxies in particular is a result of major mergers which are difficult to explore how exactly they evolve. 
+
+\subsection{Overview of Current Understanding}
+Major galaxy mergers cause dramatic disturbances in the stellar disk/bulge morphology. In general, galaxies will build up over time, through mergers, each associated with morphological changes. These changes will eventually lead to massive, elliptical galaxies \citep{Duc2013}. 
+Specifically, dry (dust poor) mergers between spirals result in elliptical galaxies with highly altered structure from the parent galaxies. These final structures are dependent on the precise initial conditions of the parent galaxies \citep{Querejeta2015}.\\
+
+These present-day galaxies can be studied through their surface density (brightness) profiles. For elliptical galaxies in particular, the S\'ersic profile is used. 
+\begin{equation}
+    I(r) = I_0\exp(-7.67[\frac{r}{R_e}^\frac{1}{n}-1])
+\end{equation}
+Where I(r) is the intensity, $I_0$ is the central intensity, r is the radius in question, $R_e$ is the effective radius (2D radius where half the light is contained), and n is the S\'ersic index.
+This profile comes from the $I \propto R^{\frac{1}{n}}$ relationship. Here R is the radius in question. The de Vaucouleurs profile, which is typical for elliptical galaxies, uses n=4. 
+%The traditional view is that modern-day S0 galaxies show a relaxed morphological structure that is not likely from major mergers because of the time that would be required to allow the structure to relax to the degree commonly seen. \citep{ElchieMoral2018}.
+
+The S\'ersic index can be used to analyze how well the merger remnant fits to the expected surface density of an elliptical galaxy. S\'ersic profiles as a whole can be used to analyze a whole host of galaxies using objective profile fits rather than subjective visual classification.
+
+\subsection{Open Questions}
+In terms of the classification of galaxies as a whole there is, in some samples, a correlation between pitch angle and the bulge size. This correlation however, is missing in other samples, particularly for more massive spirals \citep{Masters2025morphology}. As surveys continue to improve in resolution and depth, more morphologies and patterns within them will be revealed \citep{Masters2025morphology}. For galaxy formation and merger history, the question of how high redshift ETGs would have formed given the traditional galaxy merger model is not resolved \citep{Duc2013}. Additionally, the level at which accretion history impacts galaxy mass growth is still an open question \citep{Duc2013}. This merger history and how it impacts the final remnant is still a question.
+
+
+\section{Proposal}
+
+\subsection{This Proposal}
+The remnant of the MW-M31 merger can be described as a classical elliptical galaxy. This proposal attempts to answer how well the S\'ersic profile fits that classification. 
+
+
+\subsection{Methods}
+In class (Lab 6) we have written code that will apply a S\'ersic profile to a set of bulge particles. This can be applied to disk and bulge particles of the MW-M31 remnant. After the system has settled, at around 7Gyr, the surface density can be examined. This will fit a S\'ersic profile but not necessarily one that has the ideal n=4. The best fit profile will need to be found by adjusting the S\'ersic index. This can be done by measuring various S\'ersic profiles and calculating the how the profile differs from the data itself. This can be done using the mean squared error. 
+\begin{equation}
+ \frac{1}{n}\sum_{i=1}^{N}{(Y_i - \hat{Y_i})^2}
+\end{equation}
+Where N is the number of data points, $Y_i$ is the observed values and $\hat{Y_i}$ is the expected values. A script can be written that by cycling through the S\'ersic indices can find the best fit with minimizing the mean squared error. Fig~\ref{fig:ProfileFits} shows a series of S\'ersic profiles with various indices. This should be more or less what the code will cycle through.\\
+I will use the bulge and disk particles for the MW and M31 at a high-res snapshot at some point after the merger. Apply the code to loop over the S\'ersic profiles and find the best fit. The best fit is the profile that is closest to the reality of the merger remnant.  
+% from Aveves
+\begin{figure}
+	% To include a figure from a file named example.*
+	% Allowable file formats are eps or ps if compiling using latex
+	% or pdf, png, jpg if compiling using pdflatex
+	\includegraphics[width=\columnwidth]{SersicIndices.png}
+    \caption{Figure from \citet{Aveves2006}. Various S\'ersic profiles with various indices. The root mean square of the fit is shown in parentheses. The bottom panel shows the change in surface density.}
+    \label{fig:ProfileFits}
+\end{figure}
+
+\subsection{Hypothesis}
+I expect that the final merger will fit quite will as a classical elliptical galaxy. This is supported by \citet{Aveves2006} who explicitly state that their simulations of disk galaxy mergers have led to S\'ersic indices that match the observed indices for early type galaxies. Additional support is given by \citet{Hopkins2008} that found spheroidal merger remnants with masses $M_{sph}\ge10^{11} M_{\odot}$ are overwhelmingly classical elliptical galaxies. 
+
+
+
+
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+
+% The best way to enter references is to use BibTeX:
+
+\bibliographystyle{mnras}
+\bibliography{example} % if your bibtex file is called example.bib
+
+
+% Alternatively you could enter them by hand, like this:
+% This method is tedious and prone to error if you have lots of references
+%\begin{thebibliography}{99}
+%\bibitem[\protect\citeauthoryear{Author}{2012}]{Author2012}
+%Author A.~N., 2013, Journal of Improbable Astronomy, 1, 1
+%\bibitem[\protect\citeauthoryear{Others}{2013}]{Others2013}
+%Others S., 2012, Journal of Interesting Stuff, 17, 198
+%\end{thebibliography}
+
+
+
+
+% Don't change these lines
+\bsp	% typesetting comment
+\label{lastpage}
+\end{document}
+
+% End of mnras_template.tex
