@@ -527,7 +527,8 @@ if __name__ == '__main__':
 
 
     # # 6. What other reasons might there be for why the orbits don't match?
-
+    # The satellite is losing mass over time, due to interactions with the host galaxy. 
+    #Also, the MW is interacting with this system and contributing its gravity
 
 
 
