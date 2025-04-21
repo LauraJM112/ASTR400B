@@ -91,6 +91,36 @@ def MSE(Sersic, sim_data):
 
 
 #%%
+def ChiSquared(Sersic, sim_data):
+    '''
+    A function to find the mean squared error between observed (sersic profile)
+    data and the predicted (data from simulation)
+    uses MSE = 1/n*sum(obs - predicted)**2
+
+    Parameters
+    ----------
+    Sersic : array of floats
+        the sersic profile
+    sim_data : array of floats
+        the expected surface density from the simulation
+
+    Returns
+    -------
+    chi : float
+        the error between the two arrays
+
+    '''
+
+    diff = np.subtract(Sersic, sim_data) #find difference
+    diff_square = diff**2 #square it
+    div = np.divide(diff_square, Sersic)
+    chi = np.sum(diff_square) #take sum and multiply by 1/n
+    
+    return chi
+
+
+
+#%%
 ### Plot De Vaucoulers profile
 plt.loglog(r_annuli, sigma, label = "simulation")
 plt.loglog(r_annuli, SersicP, label = "Sersic n=4", ls='-.')
@@ -113,7 +143,7 @@ for i in range(0, len(ind)): #loop through indicies and find sersic profiles
 error = np.zeros((len(ind), 2)) #make array to store errors
 
 for i in range(len(Sersic)): #loop over sersic array
-    ind_error = MSE(Sersic[i], sigma) #run MSE for each profile
+    ind_error = ChiSquared(Sersic[i], sigma) #run MSE for each profile
     error[i] = [ind[i], ind_error]#store in error array
 res = min(error, key=min) # list with minimum error value and index
 
@@ -123,12 +153,13 @@ print("Minimum element sublist is : " + str(res))
 
 #%%
 plt.plot(error[:,0], error[:,1]) #plot all error measurments
-plt.title("MSE error as a function of Sersic Index")
+plt.suptitle("Chi Squared error as a function of Sersic Index", size=12)
+plt.title(f"Minimum error is at index {round(res[0], 3)} with value of {round(res[1], 2)}", size=9)
 plt.scatter(res[0], res[1], color='tab:orange') #plot point at minimum error 
 plt.xlabel("Index")
 plt.ylabel("Error")
-plt.ylim(0, 0.007)
-plt.xlim(2.5, 5)
+plt.ylim(0, 8)
+plt.xlim(3.25, 4.75)
 plt.show()
 
 #%%
