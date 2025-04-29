@@ -1,0 +1,255 @@
+% mnras_template.tex 
+%
+% LaTeX template for creating an MNRAS paper
+%
+% v3.3 released April 2024
+% (version numbers match those of mnras.cls)
+%
+% Copyright (C) Royal Astronomical Society 2015
+% Authors:
+% Keith T. Smith (Royal Astronomical Society)
+
+% Change log
+%
+% v3.3 April 2024
+%   Updated \pubyear to print the current year automatically
+% v3.2 July 2023
+%	Updated guidance on use of amssymb package
+% v3.0 May 2015
+%    Renamed to match the new package name
+%    Version number matches mnras.cls
+%    A few minor tweaks to wording
+% v1.0 September 2013
+%    Beta testing only - never publicly released
+%    First version: a simple (ish) template for creating an MNRAS paper
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Basic setup. Most papers should leave these options alone.
+\documentclass[fleqn,usenatbib]{mnras}
+
+% MNRAS is set in Times font. If you don't have this installed (most LaTeX
+% installations will be fine) or prefer the old Computer Modern fonts, comment
+% out the following line
+\usepackage{newtxtext,newtxmath}
+% Depending on your LaTeX fonts installation, you might get better results with one of these:
+%\usepackage{mathptmx}
+%\usepackage{txfonts}
+
+% Use vector fonts, so it zooms properly in on-screen viewing software
+% Don't change these lines unless you know what you are doing
+\usepackage[T1]{fontenc}
+
+% Allow "Thomas van Noord" and "Simon de Laguarde" and alike to be sorted by "N" and "L" etc. in the bibliography.
+% Write the name in the bibliography as "\VAN{Noord}{Van}{van} Noord, Thomas"
+\DeclareRobustCommand{\VAN}[3]{#2}
+\let\VANthebibliography\thebibliography
+\def\thebibliography{\DeclareRobustCommand{\VAN}[3]{##3}\VANthebibliography}
+
+
+%%%%% AUTHORS - PLACE YOUR OWN PACKAGES HERE %%%%%
+
+% Only include extra packages if you really need them. Avoid using amssymb if newtxmath is enabled, as these packages can cause conflicts. newtxmatch covers the same math symbols while producing a consistent Times New Roman font. Common packages are:
+\usepackage{graphicx}	% Including figure files
+\usepackage{amsmath}	% Advanced maths commands
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%% AUTHORS - PLACE YOUR OWN COMMANDS HERE %%%%%
+
+% Please keep new commands to a minimum, and use \newcommand not \def to avoid
+% overwriting existing commands. Example:
+%\newcommand{\pcm}{\,cm$^{-2}$}	% per cm-squared
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%% TITLE PAGE %%%%%%%%%%%%%%%%%%%
+
+% Title of the paper, and the short title which is used in the headers.
+% Keep the title short and informative.
+\title[S\'ersic profile of the MW-M31 merger remnant]{S\'ersic profile of the MW-M31 merger remnant}
+
+% The list of authors, and the short list which is used in the headers.
+% If you need two or more lines of authors, add an extra line using \newauthor
+\author[L. Mack]{
+Laura Mack$^{1}$
+\\
+% List of institutions
+$^{1}$Steward Observatory, University of Arizona
+}
+
+% These dates will be filled out by the publisher
+%\date{Accepted XXX. Received YYY; in original form ZZZ}
+
+% Prints the current year, for the copyright statements etc. To achieve a fixed year, replace the expression with a number. 
+\pubyear{\the\year{}}
+
+% Don't change these lines
+\begin{document}
+\label{firstpage}
+\pagerange{\pageref{firstpage}--\pageref{lastpage}}
+\maketitle
+
+% Abstract of the paper
+% \begin{abstract}
+% This is a simple template for authors to write new MNRAS papers.
+% The abstract should briefly describe the aims, methods, and main results of the paper.
+% It should be a single paragraph not more than 250 words (200 words for Letters).
+% No references should appear in the abstract.
+% \end{abstract}
+
+% Select between one and six entries from the list of approved keywords.
+% Don't make up new ones.
+\begin{keywords}
+Local Group -- Major Merger -- Dry Merger -- S\'ersic Profiles -- Elliptical Galaxy 
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%% BODY OF PAPER %%%%%%%%%%%%%%%%%%
+
+\section{Introduction}
+%This section might be too specific, look at research 2
+%Paragraph 1: Introduce your topic (as defined under “assigned topics” in the instructions for Assignment 2). This does not mean write ”My project is to ..”. Instead, if your topic were e.g. the evolution of SMBHs, you would write ”Super Massive Black Holes (SMBHs) are believed to reside in the center of massive galaxies” . I.e. define the topic and associated broad concepts in galaxy evolution (e.g. dark matter halos, tidal tails, Local Group - see keywords).
+The Milky Way - Andromeda (M31) galaxy merger is the system where the most accurate conclusions for the merger remnant can be drawn. This is because those galaxies lie within the \textbf{local group} or our galactic neighborhood. Therefore the initial conditions of this system can be well constrained.
+For our purposes, a \textbf{galaxy} is a collection of gravitationally bound stars, gas, and dust that cannot be described by the properties of that matter and classical laws of motion \citep{Willman2012}.
+The MW-M31 merger can be classified as a \textbf{major merger}. This is a merger between two galaxies where the ratio of their size does not exceed 1/3. 
+%chuck this section in methodology when you talk about the simulation
+For the purposes of this project, a dry merger is assumed. A \textbf{dry merger} is one that is has a very limited gas supply. This in turn means that the galaxy merger will not lead to star formation. 
+An \textbf{elliptical galaxy} is a galaxy that appears to be large, smooth and spheroidal \citep{Masters2012}. 
+
+
+%Paragraph 2: Explain why your topic matters to our understanding of galaxy evo- lution. You must define the terms “galaxy” (Lecture 1, Willman & Strader 2012 AJ) and “galaxy evolution”. Bold-face these words when they are first defined.
+Understanding and classifying galaxies can lead to understanding patterns in galaxy formation. This understanding can be used to connect the disparate snapshots gathered from observations into a complete picture of galaxy evolution. The formation of elliptical galaxies in particular is a result of major mergers which are difficult to explore how exactly they evolve. % same as from research 2
+
+%Paragraph 3: Explain what we currently know about your chosen topic. Papers must be cited in this paragraph. A figure must be referenced within the text to help explain something learned about the topic (what the topic is or why it matters).
+Major galaxy mergers cause dramatic disturbances in the stellar disk/bulge morphology. In general, galaxies will build up over time, through mergers, each associated with morphological changes. These changes will eventually lead to massive, elliptical galaxies \citep{Duc2013}. This process is called hierarchical growth.
+Specifically, dry mergers between spirals result in elliptical galaxies with highly altered structure from the parent galaxies \citep{Aceves2006}. These final structures are dependent on the precise initial conditions of the parent galaxies \citep{Querejeta2014}.
+These present-day galaxies can be studied through their surface density (brightness) profiles. For elliptical galaxies in particular, the \textbf{S\'ersic profile} is used. Which can be defined as:
+\begin{equation}
+    I(r) = I_0\exp(-7.67[\frac{r}{R_e}^\frac{1}{n}-1])
+    \label{eq:sErsic}
+\end{equation}
+
+Where I(r) is the intensity, $I_0$ is the central intensity, r is the radius in question, $R_e$ is the effective radius (2D radius where half the light is contained), and n is the S\'ersic index. This particular version of the S\'ersic profile assumes that the mass to light ratio ($\frac{M}{L}$)is 1. If $\frac{M}{L} = 1$  then the S\'ersic profile is also the mass surface density profile. 
+This profile comes from the $I \propto R^{\frac{1}{n}}$ relationship. Here I is the intensity and R is the radius in question. The de Vaucouleurs profile, which is typical for elliptical galaxies, uses n = 4. 
+The S\'ersic index can be used to analyze how well the merger remnant fits to the expected surface density of an elliptical galaxy. S\'ersic profiles as a whole can be used to analyze a whole host of galaxies using objective profile fits rather than subjective visual classification.
+
+%Figure 1: The figure should be a paper from a refereed journal paper that illustrates something we have learned about the topic. The figure must have a caption that includes the paper citation and describes everything that is plotted. This cannot be verbatim from the original paper. The caption must finish with the punchline for the figure - what should the reader take away from the figure?
+\begin{figure}
+	\includegraphics[width=\columnwidth]{TuningFork.png}
+    \caption{The Hubble tuning fork. This particular version is from \citet{Masters2025morphology} and also includes example galaxy images from the Sloan Digital Sky Survey. As a whole this is an overview common morphologies and classifications of galaxies.}
+    \label{fig:TuningFork}
+\end{figure}
+
+%Paragraph 4: What are the open questions in your chosen topic area (as defined in Paragraph 1)? One of these open questions must relate to your specific project. How are people trying to solve these questions? You must include citations.
+
+In terms of the classification of galaxies as a whole there is, in some samples, a correlation between pitch angle and the bulge size. This correlation however, is missing in other samples, particularly for more massive spirals \citep{Masters2025morphology}. As surveys continue to improve in resolution and depth, more morphologies and patterns within them will be revealed \citep{Masters2025morphology}. For galaxy formation and merger history, the question of how high redshift elliptical galaxies would have formed given the traditional galaxy merger model is not resolved \citep{Duc2013}. Additionally, the level at which accretion history impacts galaxy mass growth is still an open question \citep{Duc2013}. 
+Open questions in the area of major merger morphology include: Can major mergers lead to lenticular (S0) galaxies \citep{ElchieMoral2018}? What kinds of galaxies are merging \citep{Hopkins2008}? At what redshift are these mergers occurring \citep{Hopkins2008}? How is there still a disk and bulge in an S0 galaxy if it formed from a major merger \citep{Querejeta2014}? What is the timescale for a major merger \citep{Lotz2008}? How have large-mass elliptical galaxies formed at high redshifts \citep{Duc2013}? 
+
+% \subsection{Maths}
+% \label{sec:maths} % used for referring to this section from elsewhere
+% Simple mathematics can be inserted into the flow of the text e.g. $2\times3=6$
+% or $v=220$\,km\,s$^{-1}$, but more complicated expressions should be entered
+% as a numbered equation:
+
+% \begin{equation}
+%     x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}.
+% 	\label{eq:quadratic}
+% \end{equation}
+% Refer back to them as e.g. equation~(\ref{eq:quadratic}).
+
+\section{This Project}
+% Paragraph 1: Introduce your specific project. (e.g. “In this paper, we will study the change in position of the SMBHs of the Milky Way and M31’s throughout the future collision and eventual merger of these two galaxies”). This isn’t supposed to be general. Be as specific as you can be. 
+In this paper, we will explore the role of dry galaxy mergers between spirals in the formation of elliptical galaxies. This will be done by finding the best fit S\'ersic profile to analyze how well the MW-M31 merger remnant can be described as a classical elliptical galaxy. 
+
+%2. Paragraph 2: Which of the open questions (paragraph 4 of the intro) does this project address?
+This project is attempting to clarify the morphology of the merger remnant. This is a partial answer to what kinds of galaxies are merging to result in the elliptical galaxies that are observed. It is also a partial answer to how accretion history effects hierarchical growth. 
+
+%3. Paragraph 3:Why is this open question an important problem to solve for our understanding of Galaxy Evolution? How will your study help us to address the open question?
+These open questions are directly related to how galaxy mergers effect the resulting elliptical galaxy. Understanding the MW-M31 merger and its remnant will provide a data point for what sort of galaxy is the result of these major, dry mergers. 
+
+\section{Methodology}
+%1. Paragraph 1: Start with an introduction to the simulations you are using. You must reference the paper associated with the simulations and describe what is meant by an “N-body” simulation. Describe how each galaxy is initially modeled (Dark matter halo with what profile, disk, etc).
+I will be using data from the N-body simulation found in \citet{simulation}. An \textbf{N-body} simulation can be defined as 
+a simulation of a large number of particles that obey the principles of classical dynamics. \citet{simulation} takes the initial (present day) conditions of the MW, M31 and M33 and runs the simulation to approximately 10 Gyr into the future. 
+
+%2. Paragraph 2: Overview your approach. What particle types are you using, what resolution of the simulation data (VLowRes, LowRes, HighRes).
+The code uses the low resolution files (LowRes), at snapshot 500. Because I am not interested in the morphology of the dark matter of the remnant, I pull the disk and bulge particles. The LowRes files were chosen because I am not interested in the exact location of particles. Snapshot 500 is comfortably after the Mw-M31 merger which happens at approximately snapshot 470. 
+
+%3. Figure 2: Include a figure to explain what you are trying to do. This figure can be from a published paper or can be a detailed diagram you created to describe your logic. The figure must have a caption, follow guidelines for the caption as listed for Figure 1.
+\begin{figure}
+	% To include a figure from a file named example.*
+	% Allowable file formats are eps or ps if compiling using latex
+	% or pdf, png, jpg if compiling using pdflatex
+	\includegraphics[width=\columnwidth]{SersicIndices.png}
+    \caption{Figure from \citet{Aceves2006}. Various S\'ersic profiles with various indices. The root mean square of the fit is shown in parentheses. The bottom panel shows the change in surface density. The S\'ersic profile is changing rather dramatically with the change in index.}
+    \label{fig:ProfileFits}
+\end{figure}
+
+%4. Paragraph 3: Describe the calculations your code will compute. You must include all relevant equations and citations, and describe the meaning behind every parameter in the equation (e.g. The circular speed is defined as Vc2 = GM/r, where M is the Mass of the host galaxy $(M\odot)$ and r is the Galactocentric radius (kpc) ). Note that the reference for the Hernquist profile is Hernquist 1990 ApJ 356.
+I primarily used code created in class to find the S\'ersic profile for the merged remnant. This meant adapting the code from Lab 6. I use the same assumptions that were made in that code, I only vary the S\'ersic index and assume that the mass to light ratio is 1. Because, I pulled disk and bulge particles for both MW and M31, the data needed to be combined and adjusted to all be in the same frame. This involves concatenating arrays and finding the center of mass of the entire system. To do that, the Center of Mass code we have previously written was adapted. In order to find the best fit S\'ersic profile,  which was defined in Equation~(\ref{eq:sErsic}), I test various S\'ersic indices and measure the goodness of fit for each profile using Chi Squared error. Which can be defined as:
+\begin{equation}
+    \chi^2 = \sum \frac{(O_i - E_i)^2 }{E_i}
+\end{equation}
+The profile with the smallest $\chi^2$ is the best fit to the surface density of the merger remnant. 
+
+%5. Paragraph 4:: Describe the plots you will need to create and explain why those plots will answer your question. Note that later your results section must feature at least two figures that you created. One Figure can be generated entirely by code from Homeworks or In Class Labs (e.g. phase diagrams, density plots). The other figure must be generated by code that includes one new function or method that YOU created BY YOURSELF.
+I plot the best fit S\'ersic profile over the mass surface
+density as a function of distance for the merger remnant. This plot will visually show the goodness of fit for the profile with the smallest chi squared error. The second plot is a measure of the chi squared error as a function of S\'ersic index. This is a measure of the how the fit changes with S\'ersic index.  
+
+%6. Note: You do not need to describe in detail what your code is doing - this must be done in the code itself (see Code Requirements). However, you can include a figure to describe a flow chart for your code logic if that helps to explain your methodology.
+
+%7. Paragraph 5: Describe your hypothesis for what you think you will find. Explain your motivation for this hypothesis.
+I expect that the final merger will fit quite will as a classical elliptical galaxy. This is supported by \citet{Aceves2006} who explicitly state that their simulations of disk galaxy mergers have led to S\'ersic indices that match the observed indices for early type galaxies. Additional support is given by \citet{Hopkins2008} that found spheroidal merger remnants with masses $M_{sph}\ge10^{11} M_{\odot}$ are overwhelmingly classical elliptical galaxies. 
+
+\section{Results}
+
+%1. Paragraphs 1 and 2: Describe each of the two figures (Figures 3, 4) that you have created from your code. One paragraph per figure. End each paragraph with the main take away result.
+The first figure I generated is a contains the surface density as a function of radius, the de Vaucouleurs profile, and best fit profile for the merger remnant. This plot is fairly similar to what was shown in lab 6 but contains the disk and bulge particles from both the MW and M31. The best fit profile was found to have a S\'ersic index of 3.86 which is sufficiently close of the de Vaucouleurs profile of n=4. 
+
+The second figure is a measure of the error between each profile I generated and the simulation data. This error was measured via Chi Squared. For the merger remnant, the minimum error is 0.94. For the initial MW, the error was somewhat higher with a minimum error of 12.08. This is reasonable since in MW contains both disk and bulge particles. For the disk an index of 2 is expected and an index of 4 is expected for the bulge. Combining these two particle types with differing properties inherently introduces error. The Chi Squared error is minimized for the S\'ersic index that best fits the surface density of the galaxies in the simulation 
+
+%2. Figure 3: This figure can be generated entirely by code from Homeworks or In Class Labs (e.g. phase diagrams, density plots).
+\begin{figure}
+	\includegraphics[width=\columnwidth]{Remnant_Profile.png}
+    \caption{Best fit profile for the merger remnant which shows surface density as a function of radius in kpc. The solid blue line is the data from \citep{simulation}. The orange dashed line is the best fit profile and the green dotted line is the de Vaucouleurs profile. The best fit S\'ersic profile has an index of 3.86 which is sufficiently close to n=4 to prove that the merger remnant is elliptical. }
+    \label{fig:RemnantProfile}
+\end{figure}
+
+
+%3. Figure 4: This figure must be generated by code that includes one new function or routine that YOU created BY YOURSELF.
+
+\begin{figure}
+	\includegraphics[width=\columnwidth]{remnant error.png}
+    \caption{Error measurement for the S\'ersic profile tested at various indices. Error measurement is in log space along the y-axis and all of the S\'ersic indices that were tested along the x-axis. The orange dot is the point of minimum error a value of 0.94 found at index 3.86.}
+    \label{fig:RemnantError}
+\end{figure}
+
+%4. Each figure must have a detailed caption where everything plotted is explained, including axis labels and line types/colors. Include in the caption a punchline for each figure that explains what the reader should take away.
+
+\section{Discussion}
+%1. Paragraph 1: Summarize one result from the previous section. Does this result agree or disagree with your hypothesis?
+The best fit S\'ersic index for the merger remnant is shown to be n= 3.86.  This result support my hypothesis that the remnant will be a classical elliptical galaxy. 
+
+%2. Paragraph 2: How does the result from Paragraph 1 relate to existing work in the literature? (E.g. the papers you cited in the introduction.) What is the importance/meaning of this result for our understanding of galaxy evolution?
+This result supports \citet{Aceves2006} in showing that a disk merger will lead to an elliptical remnant. It also supports the conclusions of \citet{Hopkins2008} where remnants with mass greater than $10^{11} M_{\odot}$ are overwhelming classical elliptical galaxies. This merger morphology could be further investigated with more specific classifications as outlined in \citet{Masters2025morphology}. 
+
+%3. Paragraph 3: What are the uncertainties in your analysis?
+The limitations of this analysis come down to how I vary the S\'ersic profile. I only change the index value while maintaining the assumption that the mass to light ratio is 1. I also assume a relationship between the scale hight and effective radius. These assumptions inherently introduce uncertainty into my calculations, this could be eliminated by performing more elaborate variations to my profile calculations.  
+
+%4. Subsequent Paragraphs: Repeat the above 3 paragraphs if you have a 2nd result (etc.)
+
+%%%%%%%%%%%%%%%%%%%% REFERENCES %%%%%%%%%%%%%%%%%%
+
+% The best way to enter references is to use BibTeX:
+
+\bibliographystyle{mnras}
+\bibliography{example} % if your bibtex file is called example.bib
+
+
+% Don't change these lines
+\bsp	% typesetting comment
+\label{lastpage}
+\end{document}
+
+% End of mnras_template.tex
