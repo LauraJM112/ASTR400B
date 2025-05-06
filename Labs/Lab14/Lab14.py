@@ -144,6 +144,7 @@ ax.set_ylabel('m-M', fontsize=22)
 ax.set_title('Distance Modulus for all SNe in Suzuki+2012', fontsize=18)
 
 legend = ax.legend(loc='upper left',fontsize=18)
+plt.savefig("Distance Modulus for all SNe")
 
 #%%
 # # Part B
@@ -188,7 +189,7 @@ nNear = len(near[0])
 print(nNear) #135 nearby supernove
 
 #%%
-# Plot the Luminosity Distance vs. Recessional Speed for all nearby Supernovae
+# Plot the Luminosity Distance vs. Recessional Speed for all nearby Supernovae (within 200 Mpc)
 
 fig = plt.figure(figsize=(10,5))
 ax = plt.subplot(111)
@@ -202,6 +203,7 @@ ax.set_title(f"Luminosity Distance vs Recessional Velocity for {nNear} SNe withi
              fontsize=15)
 
 legend = ax.legend(loc='upper left',fontsize=18)
+
 
 #%%
 # # Part D
@@ -227,6 +229,7 @@ ax.set_title(f"Luminosity Distance vs Recessional Velocity for {nNear} SNe withi
              fontsize=15)
 
 legend = ax.legend(loc='upper left',fontsize=18)
+plt.savefig("Luminosity Distance for nearby SNe")
 
 #%%
 # # Part E
@@ -251,6 +254,7 @@ ax.set_title("Luminosity Distance vs Recessional Velocity for all SNe in Suzuki+
              fontsize=15)
 
 legend = ax.legend(loc='upper left',fontsize=18)
+plt.savefig("Luminosity Distance for all SNe")
 
 #%%
 
@@ -270,24 +274,45 @@ legend = ax.legend(loc='upper left',fontsize=18)
 
 # define an array of redshifts to compute the luminosity distance
 
+zarray = np.linspace(0.01, 1.1*max(data['z']), 100)
 
-
-
+#%%
 # Compute the corresponding recessional velocities using the doppler shift
 # z = v/c
 
+vrec = zarray*c.to(u.km/u.s)
 
-
-
+#%%
 # Generate models for the luminosity distance as a function of z 
 # for Benchmark and Einstein De Sitter Cosmologies. 
 # Use a list comprehension
+modelLD_Benchmark = [BenchMark.LuminosityDistance(i).value for i in zarray]
+modelLD_EinsteinDeSitter = [EinsteinDeSitter.LuminosityDistance(i).value for i in zarray]
 
-
-
-
+#%%
 # Plot the new models on top of the data
+# Plot the whole dataset, not just the nearby SNe
+modelLD = VR/BenchMark.Ho
 
+# Add the linear model to the figure of the nearest SNe
+fig = plt.figure(figsize=(10,5))
+ax = plt.subplot(111)
+
+# plot nearby SNe
+ax.plot(VR, LD, 'b.', label = "Supernove Data")
+# add model
+ax.plot(VR, modelLD, 'r', label = "V/Ho")
+#benchmark
+ax.plot(vrec, modelLD_Benchmark, ls = "--", lw=5, label = "Benchmark", c = "orange")
+ax.plot(vrec, modelLD_EinsteinDeSitter, ls = ":", lw = 5, label = "EinsteinDeSitter", c="green")
+
+ax.set_xlabel('Recessional velocity [km/s]', fontsize=18)
+ax.set_ylabel('Luminosity Distance [Mpc]', fontsize=18)
+ax.set_title("Luminosity Distance vs Recessional Velocity for all SNe in Suzuki+2012",
+             fontsize=15)
+
+legend = ax.legend(loc='upper left',fontsize=18)
+plt.savefig("Lab14")
 
 
 # To determine the best fit, you would test different values of Omega_M and Omega_L and generate probability contours
