@@ -129,6 +129,30 @@ def sersicE(r, re, n, mtot):
     
     return I
 
+def ChiSquared(profile, sim_data):
+    '''
+    A function to find the mean squared error (goodness of fit) between observed (sersic profile)
+    data and the predicted (data from simulation)
+    uses MSE = 1/n*sum(obs - predicted)**2
+
+    Parameters
+    ----------
+    Sersic : array of floats
+        the sersic profile
+    sim_data : array of floats
+        the expected surface density from the simulation
+
+    Returns
+    -------
+    chi : float
+        the error between the two arrays
+
+    '''
+    index = np.where(sim_data > 0)
+    diff = np.subtract(profile[index], sim_data[index]) #find difference
+    diff_square = diff**2 #square it
+    div = np.divide(diff_square, sim_data[index]) #divide by expected
+    chi = np.sum(div) #take sum 
 
     
-
+    return chi
